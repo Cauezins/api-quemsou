@@ -4,13 +4,14 @@ const db = deta.Base("quemsou_db");
 
 function isValidUser(username, password) {
     return db.fetch({ "email": username, "senha":password })
-      .then(result => [result.items.length > 0, result.items[0]])
+      .then(result => [result.items.length, result.items[0]])
       .catch(() => false);
 }
 
 async function login(username, password, res) {
     const valid = await isValidUser(username, password);
-    if (valid[0]) {
+    console.log(valid);
+    if (valid[0] == 1) {
       res.json({
         'status': 'success',
         'msg': 'Login efetuado com sucesso!',
