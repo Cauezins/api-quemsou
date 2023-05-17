@@ -10,7 +10,7 @@ function isValidUser(username, password) {
 
 async function login(username, password, res) {
     const valid = await isValidUser(username, password);
-    console.log(valid);
+    
     if (valid[0] == 1) {
       res.json({
         'status': 'success',
@@ -27,6 +27,5 @@ async function login(username, password, res) {
   }
 
 module.exports = {
-    login,
-    isValidUser
+    login
 }
