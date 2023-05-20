@@ -4,7 +4,7 @@ const login = require('./Controllers/login');
 const cadastro = require('./Controllers/cadastro');
 
 router.get('/login', (req, res) => {   
-    login.login(req.query.email, req.query.senha, res);
+    login.login(req.body.nome, res);
 });
 router.post('/cadastro', (req, res) => {   
     cadastro.cadastro(req.body, res);

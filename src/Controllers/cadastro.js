@@ -2,14 +2,14 @@ const { Deta } = require('deta');
 const deta = Deta("b0x5Zhqf4asJ_q7hLTJqdeJjY6kBsR3J9N47NvFMG3jEf");
 const db = deta.Base("quemsou_db");
 
-function isValidUser(email) {
-    return db.fetch({"email": email})
+function isValidUser(nome) {
+    return db.fetch({"nome": nome})
       .then(result => result.items.length)
       .catch(() => 1);
 }
 
 async function cadastro(data, res) {
-    const valid = await isValidUser(data.email);
+    const valid = await isValidUser(data.nome);
     
     if(valid == 1) {
         res.json({
@@ -19,8 +19,14 @@ async function cadastro(data, res) {
 
     }else {
         db.put({
-            "email": data.email,
-            "senha": data.senha
+            "nome": data.nome,
+            "curso": data.curso,
+            "bio": data.bio,
+            "soft": data.soft,
+            "hard": data.hard,
+            "trabalhos": data.trabalhos,
+            "linkedin": data.linkedin,
+            "img": data.img
         }).then(() => {
             res.json({
                 'status': 'success',
